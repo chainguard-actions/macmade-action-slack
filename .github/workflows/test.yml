@@ -1,0 +1,17 @@
+name:   test
+on:     [push]
+permissions: {}
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            
+            - uses: macmade/action-slack@946af3142e8b80fba76ba5acae717cb5427b3811 # v1.0.0
+              if:   ${{ always() }}
+              env:
+                SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK_URL }}
+              with:
+                channel:    '#ci'
+                status:     ${{ job.status }}
+                title:      'hello, world'
+                text:       'This is a test message...'

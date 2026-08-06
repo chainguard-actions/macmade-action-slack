@@ -1,0 +1,16 @@
+{
+  "owner": "macmade",
+  "repo": "action-slack",
+  "version": "v1.0.0",
+  "commit_sha": "946af3142e8b80fba76ba5acae717cb5427b3811",
+  "url": "https://github.com/macmade/action-slack",
+  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
+  "test_agent_version": "2",
+  "harden_agent_version": "2",
+  "node_artifact": {
+    "gcs_uri": "gs://prod-actions-node-artifacts/node-artifacts/macmade/action-slack/v1.0.0/sha256-252ae067902d1187b1e345dd4e562de2cb2b8a6a88ef7c4af45192cbe60af319.tar.gz",
+    "sha256": "252ae067902d1187b1e345dd4e562de2cb2b8a6a88ef7c4af45192cbe60af319",
+    "size_bytes": 1021735
+  }
+}

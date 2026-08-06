@@ -1,0 +1,30 @@
+name: Test cancelled status without optional text
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run action with cancelled status and no text input
+        id: action
+        uses: .
+        with:
+          channel: '#alerts'
+          status: cancelled
+          title: Workflow Cancelled
+          # text is intentionally omitted to test the default empty string behavior
+        continue-on-error: true
+
+      - name: Assert action failed due to missing webhook URL (no SLACK_WEBHOOK_URL set)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # Without SLACK_WEBHOOK_URL, the action must fail
+          if [ "$OUTCOME" != "failure" ]; then
+            echo "FAIL: expected action to fail when SLACK_WEBHOOK_URL is not set, but got: $OUTCOME"
+            exit 1
+          fi
+          echo "PASS: action correctly failed when SLACK_WEBHOOK_URL is not set (cancelled status, no text)"

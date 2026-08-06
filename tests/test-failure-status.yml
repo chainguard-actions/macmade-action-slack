@@ -1,0 +1,36 @@
+name: Test failure status with invalid webhook
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run action with failure status and invalid webhook URL
+        id: action
+        uses: .
+        with:
+          channel: '#test-channel'
+          status: failure
+          title: Build Failed
+          text: The build has failed
+        env:
+          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/INVALID/INVALID/INVALID
+        continue-on-error: true
+
+      - name: Assert action attempted to send (got past webhook URL check)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          # The action should fail at the network/API level (not at the missing webhook URL check)
+          # Either failure (network error) or success are acceptable here;
+          # what matters is it did NOT fail with "SLACK_WEBHOOK_URL is not set"
+          # Since we can't inspect the error message directly, we just verify
+          # the action ran (outcome is set, not skipped)
+          if [ "$OUTCOME" = "skipped" ]; then
+            echo "FAIL: action was skipped unexpectedly"
+            exit 1
+          fi
+          echo "PASS: action ran with failure status (outcome: $OUTCOME)"

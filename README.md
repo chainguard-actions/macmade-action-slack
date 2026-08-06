@@ -1,1 +1,76 @@
-# macmade-action-slack
+action-slack
+============
+
+[![Issues](http://img.shields.io/github/issues/macmade/action-slack.svg?logo=github)](https://github.com/macmade/action-slack/issues)
+![Status](https://img.shields.io/badge/status-active-brightgreen.svg?logo=git)
+![License](https://img.shields.io/badge/license-mit-brightgreen.svg?logo=open-source-initiative)  
+[![Contact](https://img.shields.io/badge/follow-@macmade-blue.svg?logo=twitter&style=social)](https://twitter.com/macmade)
+[![Sponsor](https://img.shields.io/badge/sponsor-macmade-pink.svg?logo=github-sponsors&style=social)](https://github.com/sponsors/macmade)
+
+### About
+
+GitHub Action to send Slack notifications.
+
+![Notifications](screenshot.png "Notifications")
+
+**Usage**:
+
+    - uses: macmade/action-slack@v1.0.0
+
+**Inputs**:
+
+  - **channel**: `String`  
+    The Slack channel to use for the notifications (eg. `#ci`).
+    
+  - **status**: `String`  
+    The job status: `${{ job.status }}`.
+    
+  - **title**: `String`  
+    A string to use as notification title.
+    
+  - **text**: `String`  
+    An optional string to use as notification message.
+
+**Environment**:
+
+  - **SLACK_WEBHOOK_URL**:  
+    The URL of the Slack incoming webhook.
+    
+**Complete example**:
+
+    name:   test
+    on:     [push]
+    jobs:
+        test:
+            runs-on: ubuntu-latest
+            steps:
+            
+                - uses: macmade/action-slack@v1.0.0
+                  if:   ${{ always() }}
+                  env:
+                    SLACK_WEBHOOK_URL:  ${{ secrets.SLACK_WEBHOOK_URL }}
+                  with:
+                    channel:    '#ci'
+                    status:     ${{ job.status }}
+                    title:      'hello, world'
+                    text:       'This is a test message...'
+
+License
+-------
+
+Project is released under the terms of the MIT License.
+
+Repository Infos
+----------------
+
+    Owner:          Jean-David Gadina - XS-Labs
+    Web:            www.xs-labs.com
+    Blog:           www.noxeos.com
+    Twitter:        @macmade
+    GitHub:         github.com/macmade
+    LinkedIn:       ch.linkedin.com/in/macmade/
+    StackOverflow:  stackoverflow.com/users/182676/macmade
+
+## Privacy
+
+This Action contacts Chainguard's licensing server to verify authorization. Connection metadata (IP address, GitHub repository identifier, timestamp, and any metadata encoded in the auth token) is transmitted to Chainguard, Inc. even if authorization is denied in accordance with our [Privacy Notice](https://www.chainguard.dev/legal/privacy-notice)
