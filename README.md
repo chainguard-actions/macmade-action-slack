@@ -6,9 +6,9 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 
 ## Versions
 
-| Version | Tag | Upstream commit |
-|---------|-----|-----------------|
-| v1.0.0 | [`v1.0.0`](https://github.com/chainguard-actions/macmade-action-slack/tree/v1.0.0) | [`946af31`](https://github.com/macmade/action-slack/commit/946af3142e8b80fba76ba5acae717cb5427b3811) |
+| Version | Tag | Upstream commit | Hardening report |
+|---------|-----|-----------------|------------------|
+| v1.0.0 | [`v1.0.0`](https://github.com/chainguard-actions/macmade-action-slack/tree/v1.0.0) | [`946af31`](https://github.com/macmade/action-slack/commit/946af3142e8b80fba76ba5acae717cb5427b3811) | [`HARDENING.md`](https://github.com/chainguard-actions/macmade-action-slack/blob/v1.0.0/HARDENING.md) |
 
 ## Privacy
 
